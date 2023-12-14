@@ -11,6 +11,8 @@ pub struct Photon {
     pub queue: Arc<wgpu::Queue>,
     /// Render pipeline
     pub render_pipeline: wgpu::RenderPipeline,
+    /// Shape buffer
+    pub shape_buffer: wgpu::Buffer,
 }
 
 #[derive(Debug)]
