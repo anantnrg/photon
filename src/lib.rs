@@ -11,6 +11,8 @@ pub struct Photon {
     pub queue: Arc<wgpu::Queue>,
     /// Render pipeline
     pub render_pipeline: wgpu::RenderPipeline,
+    /// Shapes
+    pub shapes: Vec<Shape>,
     /// Shape buffer
     pub shape_buffer: wgpu::Buffer,
 }
@@ -215,6 +217,13 @@ impl Photon {
             },
             multiview: None,
         });
+
+        let shape_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("shape_buffer"),
+            contents: bytemuck::cast_slice(VERTICES),
+            usage: wgpu::BufferUsages::UNIFORM,
+        });
+
         Self {
             device,
             queue,
