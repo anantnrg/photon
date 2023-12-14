@@ -12,7 +12,7 @@ pub struct Photon {
     /// Render pipeline
     pub render_pipeline: wgpu::RenderPipeline,
     /// Shapes
-    pub shapes: Vec<Shape>,
+    pub shapes: &mut Vec<Shape>,
     /// Shape buffer
     pub shape_buffer: wgpu::Buffer,
 }
@@ -218,13 +218,14 @@ impl Photon {
             multiview: None,
         });
 
-        let shape_buffer = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+        let shape_buffer = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("shape_buffer"),
-            contents: bytemuck::cast_slice(VERTICES),
-            usage: wgpu::BufferUsages::UNIFORM,
+            size: 0,
+            usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
         });
 
-        let shapes: Vec<Shape> = Vec::new();
+        let mut shapes: &mut Vec<Shape>;
 
         Self {
             device,
