@@ -230,6 +230,8 @@ impl Photon {
             device,
             queue,
             render_pipeline,
+            shape_buffer,
+            shapes,
         }
     }
 
