@@ -224,6 +224,8 @@ impl Photon {
             usage: wgpu::BufferUsages::UNIFORM,
         });
 
+        let shapes: Vec<Shape> = Vec::new();
+
         Self {
             device,
             queue,
