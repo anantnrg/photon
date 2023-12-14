@@ -37,7 +37,7 @@ pub enum ShapeType {
 }
 
 /// Represents a shape with properties such as position, size, color, etc.
-#[derive(Debug)]
+#[derive(Copy, Clone, Debug, bytemuck::Pod, bytemuck::Zeroable)]
 #[repr(C)]
 pub struct Shape {
     /// Type of the shape.
